@@ -1,2 +1,38 @@
-<h1>Tweets#index</h1>
-<p>Find me in app/views/tweets/index.html.erb</p>
+
+<%= render 'header', title_name: 'All Tweets' %>
+<div class="container">
+    <h1>All tweets in this document</h1>
+    <div class='tweets'>
+        <% @tweets.each do |tw| %>
+        <div class="modal" id="modal" >
+          <div class="modal-background"></div>
+          <div class="modal-card">
+            <header class="modal-card-head">
+              <p class="modal-card-title">Delete User</p>
+              <button class="delete" aria-label="close"></button>
+            </header>
+            <section class="modal-card-body">
+              <p>Are u sure u want to delete this tweet? </p>
+              <!-- Content ... -->
+            </section>
+            <footer class="modal-card-foot">
+              <%= link_to 'Delete', tweet_path(tw),class: 'is-danger', method: :delete %>
+              <a href="#" style="margin-left:50px;"><button class="button"> Cancel </button> </a> 
+            </footer>
+          </div>
+        </div>
+        <ul>
+            <li> <%= link_to tw.tweet, tweet_path(tw.id) %> </li>
+            <span class='shift_edit'>
+                <%= link_to 'Edit', edit_tweet_path(tw.id),class: 'is-success' %>
+                <%= link_to 'Delete', root_path,{:remote => true,'data-toggle' =>  "modal", 'data-target' => '#modal','class' => 'button_modal is-danger'}  %>
+            </span>
+        </ul>
+        <% end %>
+    </div>
+</div>
+
+
+
+
+<%= javascript_pack_tag 'modal' %>
