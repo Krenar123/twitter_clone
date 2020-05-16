@@ -1,24 +1,12 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+**Simple twitter clone with rails
 
-Things you may want to cover:
+Ruby version ruby '2.6.6'
 
-* Ruby version
+No other dependencies for this project just Bulma as css Framework.
 
-* System dependencies
+One model is created Tweet you can see it in db/schema.rb and access it in db/seeds.rb
 
-* Configuration
+How to run the test suite --  no test suite for this project
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
