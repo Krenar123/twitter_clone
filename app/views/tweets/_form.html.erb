@@ -8,17 +8,26 @@
     <% end %>
 </ul>
 <% end %>
-<div class="field">
-    <%= form_with model: tweet, local: true do |form| %>
-        
-            <%= form.label :tweet, class:"label" %>
-            <br>
-            <%= form.text_field :tweet, class:"input is-success" %>
-        
-        
-        
-            <%= form.submit button_name,class:"button is-success" %>
-        
-    <% end %>
+<br>
+<div class="section">
+<div class="columns">
+    <div class="column is-6 is-offset-3">
+        <%= form_with model: tweet, local: true do |form| %>
+            <div class="field">
+                <%= form.label :tweet, class:"label" %>
+                <p class="control has-icons-left ">
+                    <%= form.text_field :tweet, class:"input is-success", placeholder:"Tweet" %>
+                </p>
+            </div>
+            
+            <div class="field">
+                <p class="control">
+                    <%= link_to button_name, our_path,class: 'button is-success' %>
+                    <%= link_to 'Cancel', our_path,class: 'button is-light' %>
+                </p>
+            </div>
+        <% end %>
+    </div>
+</div>
 </div>
 
