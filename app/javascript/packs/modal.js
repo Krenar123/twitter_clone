@@ -1,5 +1,3 @@
-//= link_directory ../javascripts .js 
-
 const but_modal = document.querySelectorAll('.button_modal')
 const modal = document.getElementById('modal')
 const close = document.getElementsByClassName('button')
