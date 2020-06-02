@@ -1,3 +1,12 @@
+ <% if local_assigns[:show]  %>
+    <% dynamic_button =  'Show' %>
+    <% dynamic_path = tweet_path(tweet.id) %>
+    <%=  %>
+<% else %>
+    <% dynamic_button =  'Edit' %>
+    <% dynamic_path = edit_tweet_path(tweet.id) %>
+
+<% end %>
 <div class="columns is-multiline">  
     <div class="column is-6 is-offset-3">
         <div class="modal" id="modal" >
@@ -19,24 +28,26 @@
             </div>
         <div class="box">
             <article class="media">
-                <div class="media-left">
-                    <figure class="image is-64x64">
-                    <img src="https://bulma.io/images/placeholders/128x128.png" alt="Image">
-                    </figure>
-                </div>
                 <div class="media-content">
                     <div class="content">
                     <p>
-                        <strong>John Smith</strong> <small>@johnsmith</small> <small>31m</small>
+                        <strong>Anonymous</strong> <small> <%= time_ago_in_words(tweet.created_at) %> </small>
                         <br>
                         <%= tweet.tweet %>
                     </p>
                     </div>
                     <nav class="level is-mobile">
                     <div class="level-right">
-                        <%= link_to 'Edit', edit_tweet_path(tweet.id),class: 'level-item is-success' %>
+                        
+                        <%= link_to dynamic_button, dynamic_path,class: 'level-item is-success' %>
+                        
                         <%= link_to 'Delete', root_path,{:remote => true,'data-toggle' =>  "modal", 'data-target' => '#modal','class' => 'level_item button_modal is-danger'}  %>
-                        <%= link_to 'Cancel', root_path,class: 'level-item is-dark',style: 'margin-left: 12px;' %>
+                        
+                        <% if local_assigns[:show] %>
+                            <%= link_to 'Cancel', root_path,class: 'level-item is-dark',style: 'margin-left: 12px;' %>
+                        <% else %>
+                            <%= link_to 'Show',tweet_path(tweet.id) ,class: 'level-item is-dark',style: 'margin-left: 12px;' %>
+                        <% end %>
                     </div>
                     </nav>
                 </div>
