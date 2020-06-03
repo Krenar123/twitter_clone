@@ -5,9 +5,9 @@
         <%= form_with model: tweet, local: true do |form| %>
             <div class="field">
                 <%= form.label :tweet, class:"label" %>
-                <p class="control has-icons-left ">
+                <p class="control">
 
-                    <%= form.text_field :tweet, class:"textarea is-dark", placeholder:"Your tweet" %>
+                    <%= form.text_field :tweet, class:"textarea", placeholder:"Your tweet" %>
                     <% if tweet.errors.any? %>
                         <% tweet.errors.full_messages.each do |msg| %>
                             <p class="is-danger"> <%= msg %> </p>

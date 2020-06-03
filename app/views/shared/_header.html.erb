@@ -1,6 +1,6 @@
 <section class="hero is-light is-medium">
   <!-- Hero head: will stick at the top -->
-  <div class="hero-head">
+  <div class="hero-head ">
     <nav class="navbar">
       <div class="container">
         <div class="navbar-brand">
@@ -11,14 +11,14 @@
             <span></span>
           </span>
         </div>
-        <div id="navbarMenuHeroA" class="navbar-menu">
+        <div id="navbarMenuHeroA" class="navbar-menu navbar__hover">
           
-          <h2 class="subtitle"> <%= link_to 'Twitter Clone',root_path,class: 'navbar-item' %></h2>
+          <h2 class="subtitle"> <%= link_to 'Twitter Clone',root_path,class: 'navbar-item main__item' %></h2>
           <div class="navbar-end">
-            <%= link_to 'All tweets', tweets_path,class: 'navbar-item' %>
+            <%= link_to 'All tweets', tweets_path,class: 'navbar-item all__item' %>
             
-            <%= link_to 'Create tweets', new_tweet_path, class: 'navbar-item' %>
-            <a class="navbar-item">
+            <%= link_to 'Create tweets', new_tweet_path, class: 'navbar-item all__item' %>
+            <a class="navbar-item all__item">
               About
             </a>
             

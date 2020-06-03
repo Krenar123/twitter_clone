@@ -7,4 +7,26 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+}
+.is-danger{
+    color:hsl(348, 100%, 61%);
+}
+.is-success{
+    color:hsl(141, 53%, 53%);
+}
+.navbar__hover {
+    & .all__item{
+        &:hover{
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            margin: 0;
+            border-bottom: 2px solid rgb(53, 53, 53);
+        }
+    }
+    & .subtitle .navbar-item.main__item{
+        &:hover{
+            background-color: whitesmoke;
+        }
+    }
 }
