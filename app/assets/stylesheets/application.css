@@ -13,18 +13,4 @@
  *= require_tree .
  *= require_self
  */
- .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-.is-danger{
-    color:hsl(348, 100%, 61%);
-}
-.is-success{
-    color:hsl(141, 53%, 53%);
-}
-.main__hero__border{
-    background-color: rgb(161, 159, 159);
-}
+

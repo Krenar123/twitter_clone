@@ -5,6 +5,7 @@ class TweetsController < ApplicationController
 
   def show
     @tweet = Tweet.find(params[:id])
+    @retweets = @tweet.retweets
   end
 
   def new
@@ -14,7 +15,7 @@ class TweetsController < ApplicationController
   def create
     @tweet = Tweet.new(tweet_params)
     if @tweet.save
-      redirect_to :tweet
+      redirect_to @tweet
     else
       render :new
     end
@@ -27,7 +28,7 @@ class TweetsController < ApplicationController
   def update
     @tweet = Tweet.find(params[:id])
     if @tweet.update(tweet_params)
-      redirect_to :tweet
+      redirect_to @tweet
     else
       render :edit
     end
@@ -37,7 +38,7 @@ class TweetsController < ApplicationController
     @tweet = Tweet.find(params[:id])
     @tweet.destroy
 
-    redirect_to :tweets
+    redirect_to root_path
   end
 
   private

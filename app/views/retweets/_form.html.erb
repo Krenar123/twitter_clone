@@ -1,0 +1,21 @@
+<article class="media">
+    <figure class="media-left">
+        <p class="image is-64x64">
+        <img src="https://bulma.io/images/placeholders/128x128.png">
+        </p>
+    </figure>
+    <div class="media-content">
+        <%= form_with model:[tweet, retweets], local: true do |form| %>
+            <div class="field">
+                <p class="control">
+                    <%= form.text_area :rtweet, class:"textarea",placeholder:"Add a comment" %>
+                </p>
+            </div>
+            <div class="field">
+                <p class="control">
+                    <%= form.submit 'Retweet',class:"button" %>
+                </p>
+            </div>
+        <% end %>
+    </div>
+</article>

@@ -1,57 +1,32 @@
- <% if local_assigns[:show]  %>
-    <% dynamic_button =  'Show' %>
-    <% dynamic_path = tweet_path(tweet.id) %>
-    <%=  %>
-<% else %>
-    <% dynamic_button =  'Edit' %>
-    <% dynamic_path = edit_tweet_path(tweet.id) %>
-
-<% end %>
 <div class="columns is-multiline">  
     <div class="column is-6 is-offset-3">
-        <div class="modal" id="modal" >
-            <div class="modal-background"></div>
-                <div class="modal-card">
-                    <header class="modal-card-head">
-                    <p class="modal-card-title">Delete Tweet</p>
-                    <button class="delete" aria-label="close"></button>
-                    </header>
-                    <section class="modal-card-body">
-                    <p>Are u sure u want to delete this tweet? </p>
-                    <!-- Content ... -->
-                    </section>
-                    <footer class="modal-card-foot">
-                    <%= link_to 'Delete', tweet_path(tweet),class: 'is-danger', method: :delete %>
-                    <a href="#" style="margin-left:50px;"><button class="button"> Cancel </button> </a> 
-                    </footer>
-                </div>
-            </div>
         <div class="box">
             <article class="media">
+                <figure class="media-left">
+                    <p class="image is-64x64">
+                    <img src="https://bulma.io/images/placeholders/128x128.png">
+                    </p>
+                </figure>
                 <div class="media-content">
                     <div class="content">
-                    <p>
-                        <strong>Anonymous</strong> <small> <%= time_ago_in_words(tweet.created_at) %> </small>
-                        <br>
-                        <%= tweet.tweet %>
-                    </p>
+                        <p>
+                            <strong>Anonymous</strong>
+                            <br>
+                            <%= tweet.tweet %>
+                            <br>
+                            <small>
+                            <%= link_to 'Delete', tweet_path(tweet),class: 'button_modal is-danger',data: {confirm: "Are u sure?"} %>
+                            <% if local_assigns[:show] %>
+                                <%= link_to 'Cancel', root_path,class: ' is-dark',style: 'margin-left: 12px;' %>
+                            <% else %>
+                                <%= link_to 'Show',tweet_path(tweet.id) ,class: ' is-dark',style: 'margin-left: 12px;' %>
+                            <% end %> · <%= time_ago_in_words(tweet.created_at) %> ago</small>
+                        </p>
                     </div>
-                    <nav class="level is-mobile">
-                    <div class="level-right">
-                        
-                        <%= link_to dynamic_button, dynamic_path,class: 'level-item is-success' %>
-                        
-                        <%= link_to 'Delete', root_path,{:remote => true,'data-toggle' =>  "modal", 'data-target' => '#modal','class' => 'level_item button_modal is-danger'}  %>
-                        
-                        <% if local_assigns[:show] %>
-                            <%= link_to 'Cancel', root_path,class: 'level-item is-dark',style: 'margin-left: 12px;' %>
-                        <% else %>
-                            <%= link_to 'Show',tweet_path(tweet.id) ,class: 'level-item is-dark',style: 'margin-left: 12px;' %>
-                        <% end %>
-                    </div>
-                    </nav>
+                    <%= render partial:'retweets/retweet', collection: tweet.retweets %>
                 </div>
             </article>
+           
         </div>
     </div>
 </div>
