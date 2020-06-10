@@ -1,3 +1,12 @@
+<% if retweets.errors.any? %>
+    <article class="media">
+        <div class="media-content is-danger">
+        <% retweets.errors.full_messages.each do |err|%>
+            <h1> <%= err %> </h1>
+        <% end %>
+        </div>
+    </article>
+<% end %>
 <article class="media">
     <figure class="media-left">
         <p class="image is-64x64">
@@ -5,7 +14,7 @@
         </p>
     </figure>
     <div class="media-content">
-        <%= form_with model:[tweet, retweets], local: true do |form| %>
+        <%= form_with(model:[tweet, retweets], local: true) do |form| %>
             <div class="field">
                 <p class="control">
                     <%= form.text_area :rtweet, class:"textarea",placeholder:"Add a comment" %>

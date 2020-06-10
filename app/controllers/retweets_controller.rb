@@ -12,6 +12,21 @@ class RetweetsController < ApplicationController
         redirect_to tweet_path(retweet.tweet)
     end
 
+    def edit
+        @retweet = Retweet.find(params[:id])
+        @tweet = @retweet.tweet
+    end
+
+    def update
+        @retweet = Retweet.find(params[:id])
+        @tweet = @retweet.tweet
+        if @retweet.update(retweet_params)
+            redirect_to tweet_path(@retweet.tweet)
+        else
+            render :edit
+        end
+    end
+
     private 
 
     def retweet_params
