@@ -1,0 +1,16 @@
+<article class="media">
+    <figure class="media-left">
+        <p class="image is-48x48">
+          <img src="https://bulma.io/images/placeholders/96x96.png">
+        </p>
+    </figure>
+    <div class="media-content">
+        <div class="content">
+          <p>
+            <%= retweet.rtweet %>
+            <br>
+            <small> <%= link_to 'Edit',edit_tweet_retweet_path(retweet.tweet, retweet) %> · <%= link_to 'Delete', tweet_retweet_path(retweet.tweet_id, retweet),method: :delete,data: { confirm: "Are u sure?"} %> · <%= time_ago_in_words(retweet.created_at) %> ago</small>
+          </p>
+        </div>
+    </div>
+</article>

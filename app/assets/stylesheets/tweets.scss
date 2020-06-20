@@ -22,11 +22,24 @@
             border-top-right-radius: 10px;
             margin: 0;
             border-bottom: 2px solid rgb(53, 53, 53);
+            background-color: transparent;
+            color: rgb(53, 53, 53);
         }
     }
     & .subtitle .navbar-item.main__item{
         &:hover{
-            background-color: whitesmoke;
+            background-color: transparent;
+            color: rgb(53, 53, 53);
         }
     }
+}
+section.hero.is-hero__main.is-medium{
+    background: linear-gradient(rgba(white,0), rgba(rgb(32, 88, 241),0.3));
+    //, url( asset-path('white-flower-on-a-white-background-4467127.jpg') 
+}
+.button_margin{
+    margin-left: 12px;
+}
+.retweets_in_tweet{
+    display:none;
 }

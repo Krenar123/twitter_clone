@@ -1,0 +1,16 @@
+<div class="modal" id="modal" >
+    <div class="modal-background"></div>
+    <div class="modal-card">
+        <header class="modal-card-head">
+            <p class="modal-card-title">Delete Tweet</p>
+            <button class="delete" aria-label="close"></button>
+        </header>
+        <section class="modal-card-body">
+            <p>Are u sure u want to delete this tweet? </p>
+        </section>
+        <footer class="modal-card-foot">
+            <%= link_to 'Delete', tweet_path(tweet),class: 'is-danger', method: :delete %>
+            <a href="#" style="margin-left:50px;"><button class="button"> Cancel </button> </a> 
+        </footer>
+    </div>
+</div>
