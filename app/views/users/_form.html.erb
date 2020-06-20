@@ -1,0 +1,45 @@
+<% if user.errors.any? %>
+    <article class="media">
+        <div class="media-content is-danger">
+        <% user.errors.full_messages.sort.each do |err|%>
+            <h1> <%= err %> </h1>
+        <% end %>
+        </div>
+    </article>
+<% end %>
+<article class="media">
+    
+    <div class="media-content">
+        <%= form_with model: user, local: true do |form| %>
+            <div class="field">
+                <%= form.label :name, class:"label" %>
+                <p class="control">
+                    <%= form.text_field :name, class:"input",placeholder:"Name.." %>
+                </p>
+            </div>
+            <div class="field">
+                <%= form.label :email, class:"label" %>
+                <p class="control">
+                    <%= form.email_field :email, class:"input",placeholder:"Email.." %>
+                </p>
+            </div>
+            <div class="field">
+                <%= form.label :password, class:"label" %>
+                <p class="control">
+                    <%= form.password_field :password, class:"input",placeholder:"Password..." %>
+                </p>
+            </div>
+            <div class="field">
+                <%= form.label :password_confirmation, class:"label" %>
+                <p class="control">
+                    <%= form.password_field :password_confirmation, class:"input",placeholder:"Confirm password..." %>
+                </p>
+            </div>
+            <div class="field">
+                <p class="control">
+                    <%= form.submit 'Create user',class:"button" %>
+                </p>
+            </div>
+        <% end %>
+    </div>
+</article>

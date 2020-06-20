@@ -1,0 +1,9 @@
+<%= render 'shared/header' , title_name: 'User',
+    subtitle:'You can see the user name and email'%>
+<br>
+<hr>
+<div class="columns is-multiline">  
+    <div class="column is-6 is-offset-3">
+        <%= render @user %>
+    </div>
+</div>
