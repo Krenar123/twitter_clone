@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_03_194911) do
+ActiveRecord::Schema.define(version: 2020_06_20_224314) do
 
   create_table "retweets", force: :cascade do |t|
     t.string "rtweet"
@@ -24,6 +24,15 @@ ActiveRecord::Schema.define(version: 2020_06_03_194911) do
     t.string "tweet"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "password_digest"
+    t.index ["email"], name: "index_users_on_email", unique: true
   end
 
   add_foreign_key "retweets", "tweets"
