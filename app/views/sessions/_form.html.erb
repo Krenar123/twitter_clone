@@ -1,0 +1,23 @@
+<article class="media">
+    <div class="media-content">
+        <%= form_with url:'/login', scope: :ss, local: true do |form| %>
+            <div class="field">
+                <%= form.label :email, class:"label" %>
+                <p class="control">
+                    <%= form.email_field :email, class:"input",placeholder:"Email.." %>
+                </p>
+            </div>
+            <div class="field">
+                <%= form.label :password, class:"label" %>
+                <p class="control">
+                    <%= form.password_field :password, class:"input",placeholder:"Password..." %>
+                </p>
+            </div>
+             <div class="field">
+                <p class="control">
+                    <%= form.submit 'Login',class:"button" %>
+                </p>
+            </div>
+        <% end %>
+    </div>
+</article>
