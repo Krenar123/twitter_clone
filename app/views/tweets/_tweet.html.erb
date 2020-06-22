@@ -24,9 +24,9 @@
                             
                         </p>
                     </div>
-                    
-                    <%= render partial:'retweets/retweet', collection: tweet.retweets %>
-                    
+                    <% if local_assigns[:show] %>
+                        <%= render partial:'retweets/retweet', collection: tweet.retweets %>
+                    <% end %>
                 </div>
             </article>
            

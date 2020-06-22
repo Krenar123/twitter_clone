@@ -10,7 +10,7 @@
 <article class="media">
     
     <div class="media-content">
-        <%= form_with model: user, local: true do |form| %>
+        <%= form_with model: [:auths,user], local: true do |form| %>
             <div class="field">
                 <%= form.label :name, class:"label" %>
                 <p class="control">

@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+class Auths::UsersController < ApplicationController
     def new 
         @user = User.new
     end
@@ -11,7 +11,7 @@ class UsersController < ApplicationController
         @user = User.new(user_params)
 
         if @user.save
-            redirect_to @user
+            redirect_to auths_user_path(@user)
         else
             render :new
         end
