@@ -16,7 +16,7 @@ class User < ApplicationRecord
     validates :name,:email, presence: true
     validates :email,format: {with: VALID_EMAIL_REGEX},
                     case_sensitive: false,
-                    uniqueness: {message: 'Email is not valid'}         
+                    uniqueness: {message: 'already exists.'}         
 
     private
 
