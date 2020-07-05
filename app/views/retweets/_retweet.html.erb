@@ -11,7 +11,7 @@
             <br>
             <%= retweet.rtweet %>
             <br>
-            <% if logged_in? %>
+            <% if logged_in? && ( user_equals?(retweet.user) || user_equals?(retweet.tweet.user) ) %>
               <small> <%= link_to 'Edit',edit_tweet_retweet_path(retweet.tweet, retweet) %> · <%= link_to 'Delete', tweet_retweet_path(retweet.tweet_id, retweet),method: :delete,data: { confirm: "Are u sure?"} %> · <%= time_ago_in_words(retweet.created_at) %> ago</small>
             <% end %>
           </p>

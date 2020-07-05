@@ -16,18 +16,21 @@ class RetweetsController < ApplicationController
 
     def destroy
         retweet = Retweet.find(params[:id])
-        if logged_in?
+        if logged_in? && (user_equals?(retweet.user) || user_equals?(retweet.tweet.user) )
             retweet.destroy
             redirect_to tweet_path(retweet.tweet)
         else
-            session_alert('alert','Not logged in',retweet.tweet) 
+            session_alert('alert','You dont have permission to delete!',retweet.tweet) 
         end
     end
 
     def edit
         @retweet = Retweet.find(params[:id])
-        session_alert('alert','Not logged in',@retweet.tweet) unless logged_in?
-        @tweet = @retweet.tweet
+        if logged_in? && ( user_equals?(@retweet.user) || user_equals?(@retweet.tweet.user) )
+            @tweet = @retweet.tweet
+        else
+            session_alert('alert','You dont have permission to edit!',@retweet.tweet)
+        end 
     end
 
     def update
