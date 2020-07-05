@@ -25,7 +25,7 @@ class TweetsController < ApplicationController
 
   def edit
     @tweet = Tweet.find(params[:id])
-    session_alert('alert','Not logged in', @tweet) unless logged_in?
+    session_alert('alert','You dont have permission to edit!', @tweet) unless logged_in? && user_equals?(@tweet.user)
   end
 
   def update
@@ -38,11 +38,13 @@ class TweetsController < ApplicationController
   end
 
   def destroy
-    session_alert('alert','Not logged in') unless logged_in?
     @tweet = Tweet.find(params[:id])
-    @tweet.destroy
-
-    redirect_to root_path
+    if logged_in? && user_equals?(@tweet.user)
+      @tweet.destroy
+      redirect_to root_path
+    else
+      session_alert('alert','You dont have permission to delete!', @tweet)
+    end 
   end
 
   private

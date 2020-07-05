@@ -22,4 +22,8 @@ module SessionsHelper
         flash[alert] = message
         redirect_to path
     end
+
+    def user_equals?(other)
+        current_user == other
+    end
 end
