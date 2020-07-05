@@ -19,7 +19,9 @@
                                 <%= link_to 'Delete', tweet_path(tweet),class: 'button_modal is-danger button_margin',data: {confirm: "Are u sure?"} %>
                             <% end %>
                             <% if local_assigns[:show] %>
-                                <%= link_to 'Edit', edit_tweet_path(tweet),class: ' is-dark',style: 'margin-left: 12px;' %>
+                                <% if logged_in? %>
+                                    <%= link_to 'Edit', edit_tweet_path(tweet),class: ' is-dark',style: 'margin-left: 12px;' %>
+                                <% end %>
                                 <%= link_to 'Cancel', root_path,class: ' is-dark',style: 'margin-left: 12px;' %>
                             <% else %>
                                 <%= link_to 'Show',tweet_path(tweet) ,class: ' is-dark',style: 'margin-left: 12px;' %>

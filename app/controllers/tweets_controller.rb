@@ -24,8 +24,8 @@ class TweetsController < ApplicationController
   end
 
   def edit
-    session_alert('alert','Not logged in') unless logged_in?
     @tweet = Tweet.find(params[:id])
+    session_alert('alert','Not logged in', @tweet) unless logged_in?
   end
 
   def update

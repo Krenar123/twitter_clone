@@ -2,8 +2,13 @@ class RetweetsController < ApplicationController
     def create
         tweet = Tweet.find(params[:tweet_id])
         if logged_in?
-            tweet.retweets.create(retweet_params)
-            redirect_to tweet
+            retweet = tweet.retweets.create(retweet_params)
+            retweet.user = current_user
+            if retweet.save
+                redirect_to tweet
+            else
+                session_alert('alert', retweet.errors.full_messages.to_sentence, tweet)
+            end
         else
             session_alert('alert','Not logged in', tweet) 
         end
