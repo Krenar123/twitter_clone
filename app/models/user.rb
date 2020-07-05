@@ -9,7 +9,9 @@ class User < ApplicationRecord
 
     has_secure_password
 
-    has_many :tweets
+    has_many :tweets, dependent: :destroy
+    has_many :retweets, dependent: :destroy
+    
     before_save :downcase_email, :capitalize_name
     
     validates :password,length:{ in: 6..20, message: 'must contain at least 6 characters'},
