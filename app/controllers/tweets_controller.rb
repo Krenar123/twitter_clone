@@ -9,6 +9,7 @@ class TweetsController < ApplicationController
   end
 
   def new
+    session_alert('alert','Not logged in') unless logged_in?
     @tweet = Tweet.new
   end
 
@@ -22,6 +23,7 @@ class TweetsController < ApplicationController
   end
 
   def edit
+    session_alert('alert','Not logged in') unless logged_in?
     @tweet = Tweet.find(params[:id])
   end
 
@@ -35,6 +37,7 @@ class TweetsController < ApplicationController
   end
 
   def destroy
+    session_alert('alert','Not logged in') unless logged_in?
     @tweet = Tweet.find(params[:id])
     @tweet.destroy
 

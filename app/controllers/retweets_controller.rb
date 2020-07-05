@@ -1,19 +1,27 @@
 class RetweetsController < ApplicationController
     def create
         tweet = Tweet.find(params[:tweet_id])
-        tweet.retweets.create(retweet_params)
-        redirect_to tweet
+        if logged_in?
+            tweet.retweets.create(retweet_params)
+            redirect_to tweet
+        else
+            session_alert('alert','Not logged in', tweet) 
+        end
     end
 
     def destroy
         retweet = Retweet.find(params[:id])
-        retweet.destroy
-
-        redirect_to tweet_path(retweet.tweet)
+        if logged_in?
+            retweet.destroy
+            redirect_to tweet_path(retweet.tweet)
+        else
+            session_alert('alert','Not logged in',retweet.tweet) 
+        end
     end
 
     def edit
         @retweet = Retweet.find(params[:id])
+        session_alert('alert','Not logged in',@retweet.tweet) unless logged_in?
         @tweet = @retweet.tweet
     end
 

@@ -2,8 +2,10 @@
 <br>
 <hr>
 <%= render @tweet, show: true %>
-<div class="columns is-multiline">  
-    <div class="column is-6 is-offset-3">
-        <%= render 'retweets/form', tweet: @tweet, retweets: @retweets.build %>
-    </div>  
-</div>
+<% if logged_in? %>
+    <div class="columns is-multiline">  
+        <div class="column is-6 is-offset-3">
+            <%= render 'retweets/form', tweet: @tweet, retweets: @retweets.build %>
+        </div>  
+    </div>
+<% end %>

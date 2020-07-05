@@ -9,7 +9,9 @@
           <p>
             <%= retweet.rtweet %>
             <br>
-            <small> <%= link_to 'Edit',edit_tweet_retweet_path(retweet.tweet, retweet) %> · <%= link_to 'Delete', tweet_retweet_path(retweet.tweet_id, retweet),method: :delete,data: { confirm: "Are u sure?"} %> · <%= time_ago_in_words(retweet.created_at) %> ago</small>
+            <% if logged_in? %>
+              <small> <%= link_to 'Edit',edit_tweet_retweet_path(retweet.tweet, retweet) %> · <%= link_to 'Delete', tweet_retweet_path(retweet.tweet_id, retweet),method: :delete,data: { confirm: "Are u sure?"} %> · <%= time_ago_in_words(retweet.created_at) %> ago</small>
+            <% end %>
           </p>
         </div>
     </div>

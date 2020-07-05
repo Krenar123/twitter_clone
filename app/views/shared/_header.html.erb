@@ -21,7 +21,12 @@
             <a class="navbar-item all__item">
               About
             </a>
-            
+            <% if current_user %>
+              <%= link_to 'Log Out', auths_logout_path,method: :delete, class: 'navbar-item all__item' %>
+            <% else %>
+              <%= link_to 'Log In', auths_login_path, class: 'navbar-item all__item' %>
+              <%= link_to 'Sign Up', auths_users_signup_path, class: 'navbar-item all__item' %>
+            <% end %>
           </div>
         </div>
       </div>
@@ -36,8 +41,10 @@
       </h1>
       <h6 class="subtitle is-6">
         <%= subtitle %>
+        <%= current_user %>
       </h6>
     </div>
   </div>
 </section>
 <%= render '/shared/flash' %>
+

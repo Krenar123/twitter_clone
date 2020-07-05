@@ -15,7 +15,9 @@
                             <%= tweet.tweet %>
                             <br>
                             <small>
-                            <%= link_to 'Delete', tweet_path(tweet),class: 'button_modal is-danger button_margin',data: {confirm: "Are u sure?"} %>
+                            <% if logged_in? %>
+                                <%= link_to 'Delete', tweet_path(tweet),class: 'button_modal is-danger button_margin',data: {confirm: "Are u sure?"} %>
+                            <% end %>
                             <% if local_assigns[:show] %>
                                 <%= link_to 'Cancel', root_path,class: ' is-dark',style: 'margin-left: 12px;' %>
                             <% else %>
@@ -29,7 +31,6 @@
                     <% end %>
                 </div>
             </article>
-           
         </div>
     </div>
 </div>
