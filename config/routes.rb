@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :likes, only: :create
+  
   resources :tweets do
     resources :retweets
   end

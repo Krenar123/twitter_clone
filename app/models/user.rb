@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+    MINIMUM_PASS_LENGTH = 6
+    MAXIMUM_PASS_LENGTH = 20
     VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
     VALID_PASSWORD = /\A      # Must contain 8 or more characters
         (?=.*\d)           # Must contain a digit
@@ -11,6 +13,7 @@ class User < ApplicationRecord
 
     has_many :tweets, dependent: :destroy
     has_many :retweets, dependent: :destroy
+    has_many :likes, dependent: :destroy
     
     before_save :downcase_email, :capitalize_name
     
