@@ -1,6 +1,6 @@
 class User < ApplicationRecord
-    MINIMUM_PASS_LENGTH = 6
-    MAXIMUM_PASS_LENGTH = 20
+    MIN_PASS_LENGTH = 6
+    MAX_PASS_LENGTH = 20
     VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
     VALID_PASSWORD = /\A      # Must contain 8 or more characters
         (?=.*\d)           # Must contain a digit
@@ -17,7 +17,7 @@ class User < ApplicationRecord
     
     before_save :downcase_email, :capitalize_name
     
-    validates :password,length:{ in: 6..20, message: 'must contain at least 6 characters'},
+    validates :password,length:{ in: (MIN_PASS_LENGTH)..(MAX_PASS_LENGTH), message: 'must contain at least 6 characters'},
     format: {with: VALID_PASSWORD, message: 'must contain digit, lower case, upper case and symbol'}
     validates :name,:email, presence: true
     validates :email,format: {with: VALID_EMAIL_REGEX},
