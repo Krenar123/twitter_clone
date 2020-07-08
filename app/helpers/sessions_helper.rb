@@ -20,7 +20,7 @@ module SessionsHelper
 
     def session_alert(alert,message,path = root_path)
         flash[alert] = message
-        redirect_to path
+        redirect_to path and return
     end
 
     def user_equals?(other)
