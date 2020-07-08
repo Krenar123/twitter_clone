@@ -3,12 +3,14 @@ require 'rails_helper'
 RSpec.describe User do
   describe 'validations' do
     context 'presence' do
-      it { should validate_presence_of(:name)}
-      it { should validate_presence_of(:email)}
+      it { should validate_presence_of(:name) }
+      it { should validate_presence_of(:email) }
     end
 
     context 'length' do
-      it { should validate_length_of(:password).is_at_least(User::MIN_PASS_LENGTH).is_at_most(User::MAX_PASS_LENGTH).with_message("must contain at least 6 characters")}
+      it { should validate_length_of(:password)
+        .is_at_least(User::MIN_PASS_LENGTH)
+        .is_at_most(User::MAX_PASS_LENGTH).with_message('must contain at least 6 characters') }
     end
 
     context 'password validations' do
@@ -27,18 +29,18 @@ RSpec.describe User do
     it { should have_many(:retweets) }
 
     context 'dependecies' do
-       context 'when destroying' do 
+      context 'when destroying' do 
         let(:user) { create(:user) }
         it 'should destroy all tweets' do
           create_list(:tweet, 1, user: user)
-          expect{user.destroy}.to change{Tweet.count}.by(-1)
+          expect { user.destroy }.to change { Tweet.count }.by(-1)
         end
 
         it 'should destroy all retweets' do
           create_list(:retweet, 1, user: user)
-          expect{user.destroy}.to change{Retweet.count}.by(-1)
+          expect { user.destroy }.to change { Retweet.count }.by(-1)
         end
-      end  
+      end
     end
   end
 end

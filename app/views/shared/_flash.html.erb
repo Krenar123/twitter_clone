@@ -5,7 +5,11 @@
         <% flash.each do |name,msg| %>
           <article class="message is-<%= name %>">
             <div class="message-header">
-              <p> Something went wrong </p>
+              <% if name == 'success' %>
+                <p>Everything is OK!</p>
+              <% else %>
+                <p> Something went wrong </p>
+              <% end %>
             </div>
             <div class="message-body">
               <%= msg %>

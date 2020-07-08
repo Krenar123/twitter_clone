@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
-  resources :likes, only: :create
+  
   
   resources :tweets do
     resources :retweets
+    resources :likes, only: [ :create]
   end
+  
 
   namespace :auths do
     get '/users/signup', to: 'users#new'

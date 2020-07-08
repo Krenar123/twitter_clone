@@ -18,10 +18,10 @@
             <%= link_to 'All tweets', tweets_path,class: 'navbar-item all__item' %>
             
             <%= link_to 'Create tweets', new_tweet_path, class: 'navbar-item all__item' %>
-            <a class="navbar-item all__item">
-              About
-            </a>
+            
+
             <% if current_user %>
+              <%= link_to 'Profile', auths_user_path(current_user), class: 'navbar-item all__item' %>
               <%= link_to 'Log Out', auths_logout_path,method: :delete, class: 'navbar-item all__item' %>
             <% else %>
               <%= link_to 'Log In', auths_login_path, class: 'navbar-item all__item' %>

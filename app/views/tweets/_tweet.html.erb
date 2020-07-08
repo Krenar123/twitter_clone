@@ -16,15 +16,18 @@
                             <br>
                             <small>
                             <% if logged_in? && user_equals?(tweet.user)%>
-                                <%= link_to 'Delete', tweet_path(tweet),class: 'button_modal is-danger button_margin',data: {confirm: "Are u sure?"} %>
+                                <%= link_to 'Delete', tweet_path(tweet),class: 'button_modal is-danger button_margin',method: :delete,data: {confirm: "Are u sure?"} %>
                             <% end %>
                             <% if local_assigns[:show] %>
                                 <% if logged_in? && user_equals?(tweet.user) %>
                                     <%= link_to 'Edit', edit_tweet_path(tweet),class: ' is-dark',style: 'margin-left: 12px;' %>
                                 <% end %>
+                                <%= link_to 'Like', tweet_likes_path(tweet) ,method: :post,class: 'button_modal is-dark button_margin' %>
                                 <%= link_to 'Cancel', root_path,class: ' is-dark',style: 'margin-left: 12px;' %>
                             <% else %>
                                 <%= link_to "Retweets (#{tweet.retweets.count})",tweet_path(tweet) ,class: ' is-dark',style: 'margin-left: 12px;' %>
+                                <!-- I should create a model tha shows up all likes -->
+                                <%= link_to "Likes (#{tweet.likes.count})",tweet_path(tweet) ,class: ' is-dark',style: 'margin-left: 12px;' %>
                             <% end %> · <%= time_ago_in_words(tweet.created_at) %> ago</small>
                             
                         </p>

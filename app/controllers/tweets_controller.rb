@@ -47,6 +47,12 @@ class TweetsController < ApplicationController
     end 
   end
 
+  def likes
+    tweet = Tweet.find(params[:id])
+    like = Like.new(user: current_user, tweet: tweet)
+    like.save
+  end
+
   private
 
   def tweet_params
