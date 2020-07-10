@@ -3,7 +3,8 @@
 <br>
 <hr>
 <div class="columns is-multiline">  
-    <div class="column is-6 is-offset-3">
+    <div class="column is-8 is-offset-2">
         <%= render @user %>
     </div>
 </div>
+<%= render partial: 'tweets/tweet', collection: @user.tweets %>

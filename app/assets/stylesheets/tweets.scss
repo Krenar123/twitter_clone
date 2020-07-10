@@ -35,7 +35,8 @@
     }
 }
 section.hero.is-hero__main.is-medium{
-    background: linear-gradient(rgba(white,0), rgba(rgb(12, 118, 145),0.8));
+    background: linear-gradient(rgba(rgb(97, 172, 190),0.1), rgba(rgb(12, 118, 145),1));
+
     //, url( asset-path('white-flower-on-a-white-background-4467127.jpg') 
 }
 .button_margin{
@@ -43,4 +44,21 @@ section.hero.is-hero__main.is-medium{
 }
 .retweets_in_tweet{
     display:none;
+}
+.hero.is-medium .hero-body{
+    padding:7rem 1.5rem;
+}
+img{
+    border-radius:50%;
+}
+.card-header .box{
+    box-shadow: 0 0.5em 1em -0.125em rgba(0, 0, 0, 0.01), 0 0px 0 0px rgba(10, 10, 10, 0);
+}
+.fa.fa-gratipay{
+    &:hover{
+        cursor: pointer;
+    }
+}
+body{
+    background-color: rgb(236, 235, 235);
 }

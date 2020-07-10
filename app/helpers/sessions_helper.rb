@@ -26,4 +26,8 @@ module SessionsHelper
     def user_equals?(other)
         current_user == other
     end
+
+    def post_liked?(tweet)
+        Like.exists?(user:current_user, tweet: tweet)
+    end
 end

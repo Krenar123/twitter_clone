@@ -1,17 +1,18 @@
 <div class="box">
     <article class="media">
         <figure class="media-left">
-            <p class="image is-64x64">
+            <p class="image is-128x128">
             <img src="https://bulma.io/images/placeholders/128x128.png">
             </p>
         </figure>
         <div class="media-content">
             <div class="content">
                 <p>
-                    <strong><%= user.name %></strong>
-                    <br>
+                    <h4><strong><%= user.name %></strong></h4>
                     <%= user.email %>
                     <br>
+                    <hr>
+                    <code> <%= "All Tweets #{user.tweets.count}" %> · <%= "All Retweets #{user.retweets.count}" %> · <%= "All Likes #{user.likes.count}" %> </code>
                 </p>
             </div>
         </div>
