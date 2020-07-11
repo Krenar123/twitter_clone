@@ -1,11 +1,12 @@
 Rails.application.routes.draw do
-  
-  
   resources :tweets do
     resources :retweets
     resources :likes, only: [ :create]
   end
   
+  # Creating these for using .js.erb for displaying likes adn retweets in root_path
+  get '/displaylikes/:id', to: 'tweets#display_likes', as: :display_likes
+  get '/displayretweets/:id', to: 'tweets#display_retweets', as: :display_retweets
 
   namespace :auths do
     get '/users/signup', to: 'users#new'

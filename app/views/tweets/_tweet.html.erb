@@ -28,8 +28,14 @@
                     <h2> <%= tweet.tweet %> </h2>
                     <br>
                     <br>
-                    <i class="fa fa-gratipay" style="color:red"></i> <small> <%= tweet.likes.count %></small>
-                    <i class="fa fa-comments"></i> <small> <%= tweet.retweets.count %></small>
+                    <%= link_to display_likes_path(tweet), :remote => true do %>
+                        <i class="fa fa-gratipay" style="color:red"></i>
+                    <% end %>    
+                    <small> <%= tweet.likes.count %></small>
+                    <%= link_to display_retweets_path(tweet), :remote => true do%>
+                        <i class="fa fa-comments"></i> 
+                    <% end %>
+                    <small> <%= tweet.retweets.count %></small>
                 </div>
             </div>
             
@@ -84,6 +90,9 @@
                     <%= render partial:'retweets/retweet', collection: tweet.retweets %>
                 </div>
             </div>
+            <% if logged_in? %>
+                <%= render 'retweets/form', tweet: tweet, retweets: tweet.retweets.build %>
+            <% end %>
         </div>
     </div>
 <% end %>

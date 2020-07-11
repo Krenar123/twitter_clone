@@ -27,6 +27,7 @@ gem "bulma-rails"
 # gem 'image_processing', '~> 1.2'
 gem "font-awesome-rails"
 gem 'font-awesome-sass', '~> 5.13.0'
+gem 'jquery-rails'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 

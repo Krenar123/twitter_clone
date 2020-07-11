@@ -47,10 +47,19 @@ class TweetsController < ApplicationController
     end 
   end
 
-  def likes
-    tweet = Tweet.find(params[:id])
-    like = Like.new(user: current_user, tweet: tweet)
-    like.save
+  def display_likes
+    @tweet = Tweet.find(params[:id])
+    respond_to do |format|
+      format.js 
+      format.json { render json: @tweet }
+    end
+  end 
+
+  def display_retweets
+    @tweet = Tweet.find(params[:id])
+    respond_to do |format|
+      format.js 
+    end
   end
 
   private
