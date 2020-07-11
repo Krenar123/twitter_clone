@@ -13,7 +13,7 @@ class User < ApplicationRecord
 
     has_many :tweets, dependent: :destroy
     has_many :retweets, dependent: :destroy
-    has_many :likes
+    has_many :likes, dependent: :destroy
     
     before_save :downcase_email, :capitalize_name
     

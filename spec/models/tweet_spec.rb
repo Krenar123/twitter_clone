@@ -13,6 +13,7 @@ RSpec.describe Tweet do
     
     describe 'authentications' do
         it { should have_many(:retweets) }
+        it { should have_many(:likes) }
         it { should belong_to(:user) }
     
         context 'dependecies' do
@@ -21,6 +22,12 @@ RSpec.describe Tweet do
                 it 'should destroy all retweets' do
                     create_list(:retweet, 1, tweet: tweet)
                     expect{tweet.destroy}.to change{Retweet.count}.by(-1)
+                end
+                
+                it 'should destroy all likes' do
+                    user = create(:user)
+                    create_list(:like, 1, user: user,tweet: tweet)
+                    expect{tweet.destroy}.to change{Like.count}.by(-1)
                 end
             end  
         end
