@@ -3,11 +3,13 @@
 // You can use Sass (SCSS) here: https://sass-lang.com/
 @import "bulma";
 
+body{
+    background-color: rgb(236, 235, 235);
+}
 .container {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
 }
 .is-danger{
     color:hsl(348, 100%, 61%);
@@ -15,29 +17,35 @@
 .is-success{
     color:hsl(141, 53%, 53%);
 }
-.navbar__hover {
-    & .all__item{
+h2.subtitle.logo{
+    display:flex;
+    align-items: center;
+    .fa-twitter{
+        padding-top:15px;
+        font-size: 2rem;
         &:hover{
-            border-top-left-radius: 10px;
-            border-top-right-radius: 10px;
-            margin: 0;
-            border-bottom: 1px solid rgb(15, 25, 46);
+            cursor: pointer;
+            color: blue;
+        }
+    }
+}
+.navbar__hover {
+    a.navbar-item.all__item{
+        transition: all 1s ease;
+        &:hover{
             background-color: transparent;
-            color: rgb(53, 53, 53);
+            border-bottom: 1px blue;
+            color: white;
         }
     }
     & .subtitle .navbar-item.main__item{
         transition: all 1s ease;
+        padding-top:20px;
         &:hover{
             background-color: transparent;
-            color: rgb(53, 53, 53);
+            color: rgb(253, 247, 247);
         }
     }
-}
-section.hero.is-hero__main.is-medium{
-    background: linear-gradient(rgba(rgb(97, 172, 190),0.1), rgba(rgb(12, 118, 145),1));
-
-    //, url( asset-path('white-flower-on-a-white-background-4467127.jpg') 
 }
 .button_margin{
     margin-left: 12px;
@@ -58,7 +66,4 @@ img{
     &:hover{
         cursor: pointer;
     }
-}
-body{
-    background-color: rgb(236, 235, 235);
 }

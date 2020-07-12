@@ -1,4 +1,4 @@
-<section class="hero is-hero__main is-medium">
+<section class="hero is-dark">
   <!-- Hero head: will stick at the top -->
   <div class="hero-head ">
     <nav class="navbar">
@@ -13,7 +13,10 @@
         </div>
         <div id="navbarMenuHeroA" class="navbar-menu navbar__hover">
           
-          <h2 class="subtitle"> <%= link_to 'Twitter Clone',root_path,class: 'navbar-item main__item' %></h2>
+          <h2 class="subtitle logo"> 
+            <i class="fa fa-twitter"></i>
+            <%= link_to 'Twitter Clone',root_path,class: 'navbar-item main__item' %>
+          </h2>
           <div class="navbar-end">
             <%= link_to 'All tweets', tweets_path,class: 'navbar-item all__item' %>
             
@@ -31,18 +34,6 @@
         </div>
       </div>
     </nav>
-  </div>
-
-  <!-- Hero content: will be in the middle -->
-  <div class="hero-body">
-    <div class="container has-text-centered">
-      <h1 class="title">
-        <%= title_name %> 
-      </h1>
-      <h6 class="subtitle is-6">
-        <%= subtitle %>
-      </h6>
-    </div>
   </div>
 </section>
 <%= render '/shared/flash' %>

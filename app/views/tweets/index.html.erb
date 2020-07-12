@@ -1,7 +1,3 @@
-
-<%= render './shared/header', title_name: 'All Tweets', subtitle: 'All tweets that you\'re asking for are on this file'%>
-<br>
-<hr>
 <div class="modal">
   <div class="modal-background"></div>
   <div class="modal-content">
@@ -20,4 +16,6 @@
     </div>
   </div>
 </div>
-<%= render @tweets %>
+<div class="columns is-multiline">
+  <%= render @tweets %>
+</div>
