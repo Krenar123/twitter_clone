@@ -11,9 +11,13 @@
 
   <body>
     <%= render './shared/header'%>
-    <br>
-    <hr>
-    <%= yield %>
+    <section class="section">
+      <%= render './shared/post_ads' %>  
+      <br>
+      <hr>
+      <br>
+      <%= yield %>
+    </section>
     <%= render './shared/footer' %>
   </body>
 </html>

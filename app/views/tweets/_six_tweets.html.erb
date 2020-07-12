@@ -1,0 +1,46 @@
+<div class="column is-3">
+    <div class="card four__header">
+        <header class="card-header">
+            <div class="box" style="width: 100%">
+                <article class="media">
+                    <figure class="media-left">
+                        <p class="image is-64x64">
+                        <img src="https://bulma.io/images/placeholders/128x128.png">
+                        </p>
+                    </figure>
+                    <div class="media-content">
+                        <div class="content">
+                            <p>
+                                <strong><%= tweet.user.name %></strong>
+                                <br>
+                                <small>
+                                <%= time_ago_in_words(tweet.created_at) %> ago</small>
+                            </p>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </header>
+        <div class="card-content">
+                <div class="content">
+                <h2> <%= tweet.tweet %> </h2>
+                <div class="icons" valign="bottom">
+                    <%= link_to display_likes_path(tweet), :remote => true do %>
+                        <i class="fa fa-gratipay" style="color:red"></i>
+                    <% end %>    
+                    <small> <%= tweet.likes.count %></small>
+                    <%= link_to display_retweets_path(tweet), :remote => true do%>
+                        <i class="fa fa-comments"></i> 
+                    <% end %>
+                    <small> <%= tweet.retweets.count %></small>
+                </div>
+            </div>
+        </div>
+    
+        <footer class="card-footer">
+            <%= link_to tweet_path(tweet),class: ' card-footer-item'  do %>
+                <i class="fa fa-retweet"></i>
+            <% end %>
+        </footer>
+    </div>
+</div>

@@ -1,6 +1,7 @@
 class TweetsController < ApplicationController
   def index
     @tweets = Tweet.all
+    @header_tweets = Tweet.take(4)
   end
 
   def show

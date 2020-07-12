@@ -1,0 +1,6 @@
+<h2 class="title"> Most likely tweets </h2>
+<div class="columns" style="background: rgb(255,255,255);background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(157,228,248,1) 50%, rgba(255,255,255,1) 100%);">
+    <% Tweet.take(4).each do |tweet| %>
+        <%= render 'tweets/six_tweets', tweet: tweet %>
+    <% end %>
+</div>
