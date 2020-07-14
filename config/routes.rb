@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :tweets do
     resources :retweets
-    resources :likes, only: [ :create]
+    resources :likes, only: [ :create, :destroy]
   end
   
   # Creating these for using .js.erb for displaying likes adn retweets in root_path

@@ -3,14 +3,20 @@ class LikesController < ApplicationController
     tweet = Tweet.find(params[:tweet_id])
     if logged_in?
       like = Like.new(user: current_user, tweet: tweet)
-      if like.save
-        session_alert('success', 'This post is liked successfully!', tweet)
-      else
-        Like.destroy_by(user: current_user, tweet: tweet)
-        session_alert('danger', 'This post is disliked', tweet)
-      end
+      like.save
+      session_alert('success', 'This post is liked successfully!', tweet)
     else
-      session_alert('alert','You dont have permission to create!') unless logged_in?
+      session_alert('alert','You dont have permission to create!')
+    end
+  end
+
+  def destroy
+    tweet = Tweet.find(params[:tweet_id])
+    if logged_in?
+      Like.destroy_by(user: current_user, tweet: tweet)
+      session_alert('danger', 'This post is disliked', tweet)
+    else
+      session_alert('alert','You dont have permission to create!')
     end
   end
 end

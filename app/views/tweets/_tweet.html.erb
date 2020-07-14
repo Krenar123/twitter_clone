@@ -41,10 +41,12 @@
             <footer class="card-footer">
                 <% if logged_in?  %>
                     <% if local_assigns[:show] %>
-                        <%= link_to tweet_likes_path(tweet) ,method: :post,class: ' card-footer-item' do %>
-                            <% if post_liked?(tweet) %>
+                        <% if post_liked?(tweet) %>
+                            <%= link_to tweet_like_path(tweet) ,method: :delete,class: ' card-footer-item' do %>
                                 <i class="fa fa-heart" style="color:red"></i>
-                            <% else %>
+                            <% end %>
+                        <% else %>
+                            <%= link_to tweet_likes_path(tweet) ,method: :post,class: ' card-footer-item' do %>
                                 <i class="fa fa-heart"></i>
                             <% end %>
                         <% end %>
