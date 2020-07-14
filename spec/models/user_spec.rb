@@ -23,7 +23,7 @@ RSpec.describe User do
       it { should allow_value('Testing123!').for(:password) }
     end
 
-    context 'tryning same with same email' do
+    context 'trying to create user with same email' do
       subject { create(:user) }
       it {  is_expected.to validate_uniqueness_of(:email).with_message("already exists.") }
     end
