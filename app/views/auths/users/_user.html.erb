@@ -9,7 +9,10 @@
             <div class="content">
                 <p>
                     <h4><strong><%= user.name %></strong></h4>
-                    <%= user.email %>
+                    <%= user.email %> 
+                    <% if logged_in? &&  user_equals?(@user) %>
+                        <%= link_to 'Edit profile',edit_auths_user_path(user), style: 'position:relative; float:right'  %>
+                    <% end %>
                     <br>
                     <hr>
                     <code> <%= "All Tweets #{user.tweets.count}" %> · <%= "All Retweets #{user.retweets.count}" %> · <%= "All Likes #{user.likes.count}" %> </code>
