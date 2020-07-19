@@ -30,4 +30,9 @@ module SessionsHelper
     def post_liked?(tweet)
         Like.exists?(user:current_user, tweet: tweet)
     end
+
+    def most_likely_tweets
+        tweets = Like.group(:tweet_id).count.sort_by{|_key,value| value}.reverse.take(4).map {|i| i[0] }
+        Tweet.find(tweets)
+    end
 end
