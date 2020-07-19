@@ -63,12 +63,13 @@
                         <% end %>
                     <% end %>
                 <% end %>
-                <%= link_to tweet_path(tweet),class: ' card-footer-item'  do %>
-                    <i class="fa fa-retweet"></i>
-                <% end %>
                 <% if local_assigns[:show] %>
                     <%= link_to root_path ,class: ' card-footer-item' do %>
                         <i class="fa fa-reply"></i>
+                    <% end %>
+                <% else %>
+                    <%= link_to tweet_path(tweet),class: ' card-footer-item'  do %>
+                        <i class="fa fa-retweet"></i>
                     <% end %>
                 <% end %>
             </footer>
