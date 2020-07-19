@@ -1,5 +1,6 @@
 module UserHelper
  def log_in(user)
+    click_on 'Log In'
     within 'form' do
         fill_in 'Email', with: user.email
         fill_in 'Password', with: user.password

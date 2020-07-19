@@ -102,7 +102,6 @@ RSpec.describe "AuthenticationProcesses" do
       let(:user) { create(:user) }
       let!(:tweet) { create(:tweet,user: user) }
       before do
-        click_on 'Log In'
         log_in(user)
         visit root_path
       end
