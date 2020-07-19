@@ -71,8 +71,9 @@ RSpec.describe "AuthenticationProcesses" do
     end
 
     context 'when signing up' do
-      it 'should redirect to user profile after submit' do
-        name = "Test"
+      let(:name) { "Test" }
+
+      before do
         click_on 'Sign Up'
 
         within 'form' do
@@ -82,8 +83,40 @@ RSpec.describe "AuthenticationProcesses" do
           fill_in 'Password confirmation', with: 'Test123!'
           click_button 'Sign up'
         end
+      end
+
+      it 'should redirect to user profile after submit' do
         expect(page).to have_content(name)
+      end
+
+      it 'should has link Edit Profile' do
         expect(page).to have_link('Edit profile')
+      end
+
+      it 'should display All tweets content ' do
+        expect(page).to have_content('All tweets')
+      end
+    end
+
+    context 'when there are articles present' do
+      let(:user) { create(:user) }
+      let!(:tweet) { create(:tweet,user: user) }
+      before do
+        click_on 'Log In'
+        log_in(user)
+        visit root_path
+      end
+
+      it 'should has user name' do
+        expect(page).to have_content(tweet.user.name)
+      end
+
+      it 'should has the tweet' do
+        expect(page).to have_content(tweet.tweet)
+      end
+
+      it 'should have retweet icon' do
+        expect(page).to have_selector('i.fa-retweet')
       end
     end
   end
