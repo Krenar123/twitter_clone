@@ -1,12 +1,3 @@
-<% if user.errors.any? %>
-    <article class="media">
-        <div class="media-content is-danger">
-        <% user.errors.full_messages.sort.each do |err|%>
-            <h1> <%= err %> </h1>
-        <% end %>
-        </div>
-    </article>
-<% end %>
 <article class="media">
     
     <div class="media-content">

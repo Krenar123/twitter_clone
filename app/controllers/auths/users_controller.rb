@@ -14,11 +14,14 @@ class Auths::UsersController < ApplicationController
 
     def update
         @user = User.find(params[:id])
-        session_alert('alert','You dont have permission to edit!', auths_user_path(@user)) unless logged_in? && user_equals?(@user)
-        if @user.update(user_params)
-            redirect_to auths_user_path(@user)
+        if logged_in? && user_equals?(@user)
+            if @user.update(user_params)
+                redirect_to auths_user_path(@user)
+            else
+                render :edit 
+            end
         else
-            render :edit 
+            session_alert('alert','You dont have permission to edit!', auths_user_path(@user)) 
         end
     end
 
@@ -29,6 +32,7 @@ class Auths::UsersController < ApplicationController
             log_in(@user)
             redirect_to auths_user_path(@user)
         else
+            flash.now[:danger] = @user.errors.full_messages.to_sentence
             render :new
         end
     end
