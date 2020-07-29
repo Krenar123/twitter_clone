@@ -17,10 +17,14 @@ class TweetsController < ApplicationController
   def create
     @tweet = Tweet.new(tweet_params)
     @tweet.user = current_user
-    if @tweet.save
-      redirect_to @tweet
+    if logged_in?
+      if @tweet.save
+        redirect_to @tweet
+      else
+        render :new
+      end
     else
-      render :new
+      session_alert('alert','Not logged in')
     end
   end
 
@@ -31,10 +35,14 @@ class TweetsController < ApplicationController
 
   def update
     @tweet = Tweet.find(params[:id])
-    if @tweet.update(tweet_params)
-      redirect_to @tweet
+    if logged_in? && user_equals?(@tweet.user)
+      if @tweet.update(tweet_params)
+        redirect_to @tweet
+      else
+        render :edit
+      end
     else
-      render :edit
+      session_alert('alert','You dont have permission to edit!', @tweet)
     end
   end
 

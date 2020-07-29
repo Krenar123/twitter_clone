@@ -6,7 +6,7 @@ class LikesController < ApplicationController
       like.save
       session_alert('success', 'This post is liked successfully!', tweet)
     else
-      session_alert('alert','You dont have permission to create!')
+      session_alert('alert','You dont have permission to like!')
     end
   end
 
@@ -16,7 +16,7 @@ class LikesController < ApplicationController
       Like.destroy_by(user: current_user, tweet: tweet)
       session_alert('danger', 'This post is disliked', tweet)
     else
-      session_alert('alert','You dont have permission to create!')
+      session_alert('alert','You dont have permission to dislike!')
     end
   end
 end
