@@ -36,10 +36,14 @@ class RetweetsController < ApplicationController
     def update
         @retweet = Retweet.find(params[:id])
         @tweet = @retweet.tweet
-        if @retweet.update(retweet_params)
-            redirect_to tweet_path(@retweet.tweet)
-        else
-            render :edit
+        if logged_in? && ( user_equals?(@retweet.user) || user_equals?(@retweet.tweet.user) )
+            if @retweet.update(retweet_params)
+                redirect_to tweet_path(@tweet)
+            else
+                render :edit
+            end
+        else 
+            session_alert('alert','You dont have permission to edit!',@tweet)
         end
     end
 
