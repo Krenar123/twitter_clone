@@ -13,7 +13,7 @@ RSpec.describe "TweetProcesses" do
       post tweets_path, post_params 
 
       follow_redirect!
-      expect(response.body).to include('Not logged in')
+      expect(response.body).to include('Not logged in!')
     end
 
     it 'should not allow to update tweet' do
@@ -29,7 +29,7 @@ RSpec.describe "TweetProcesses" do
       patch tweet_path(tweet), post_params 
 
       follow_redirect!
-      expect(response.body).to include('You dont have permission to edit!')
+      expect(response.body).to include('Not logged in!')
     end
 
     it 'should not allow to destroy tweet' do
@@ -38,7 +38,7 @@ RSpec.describe "TweetProcesses" do
       delete tweet_path(tweet)
 
       follow_redirect!
-      expect(response.body).to include('You dont have permission to delete!')
+      expect(response.body).to include('Not logged in!')
     end
 
     it 'should not be able to like a tweet' do
@@ -46,9 +46,9 @@ RSpec.describe "TweetProcesses" do
 
       post "/tweets/#{tweet.id}/likes"
 
-      expect(response).to redirect_to(root_path)
+      expect(response).to redirect_to(auths_login_path)
       follow_redirect!
-      expect(response.body).to include('You dont have permission to like!')
+      expect(response.body).to include('Not logged in!')
     end
 
     it 'should not be able to dislike a tweet' do
@@ -57,9 +57,9 @@ RSpec.describe "TweetProcesses" do
 
       delete "/tweets/#{tweet.id}/likes/#{like.id}"
 
-      expect(response).to redirect_to(root_path)
+      expect(response).to redirect_to(auths_login_path)
       follow_redirect!
-      expect(response.body).to include('You dont have permission to dislike!')
+      expect(response.body).to include('Not logged in!')
     end
   end
 
@@ -68,18 +68,11 @@ RSpec.describe "TweetProcesses" do
       let(:user) { create(:user) }
       let(:tweet) { create(:tweet, user: user) }
 
-      it 'should allow to update' do
-        post_params = {
-          params: {
-            ss: {
-              email: user.email,
-              password: user.password
-            }
-          }
-        }
-        
-        post auths_login_path, post_params
+      before do
+        log_in_request(user)
+      end
 
+      it 'should allow to update' do
         patch_params = {
           params: {
             tweet: {
@@ -95,17 +88,6 @@ RSpec.describe "TweetProcesses" do
       end
 
       it 'should allow to delete' do
-        post_params = {
-          params: {
-            ss: {
-              email: user.email,
-              password: user.password
-            }
-          }
-        }
-        
-        post auths_login_path, post_params
-
         delete tweet_path(tweet)
 
         expect(response).to redirect_to(root_path)
@@ -118,16 +100,7 @@ RSpec.describe "TweetProcesses" do
       let(:other_user) { create(:user) }
 
       before do
-        post_params = {
-          params: {
-            ss: {
-              email: other_user.email,
-              password: other_user.password
-            }
-          }
-        }
-        
-        post auths_login_path, post_params
+        log_in_request(other_user)
       end
 
       it 'should allow me to like them tweets' do

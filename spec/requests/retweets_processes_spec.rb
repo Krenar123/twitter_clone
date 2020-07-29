@@ -15,9 +15,9 @@ RSpec.describe "RetweetsProcesses" do
 
       post tweet_retweets_path(tweet), post_params
 
-      expect(response).to redirect_to(tweet)
+      expect(response).to redirect_to(auths_login_path)
       follow_redirect!
-      expect(response.body).to include('Not logged in')
+      expect(flash[:danger]).to eq('Not logged in!')
     end
 
     it 'cannot update retweets' do
@@ -32,9 +32,9 @@ RSpec.describe "RetweetsProcesses" do
       }
       patch tweet_retweet_path(tweet, retweet), patch_params
       
-      expect(response).to redirect_to(tweet)
+      expect(response).to redirect_to(auths_login_path)
       follow_redirect!
-      expect(response.body).to include('You dont have permission to edit!')
+      expect(flash[:danger]).to eq('Not logged in!')
     end
 
     it 'cannot delete retweets' do
@@ -42,35 +42,26 @@ RSpec.describe "RetweetsProcesses" do
 
       delete tweet_retweet_path(tweet, retweet)
 
-      expect(response).to redirect_to(tweet)
+      expect(response).to redirect_to(auths_login_path)
       follow_redirect!
-      expect(response.body).to include('You dont have permission to delete!')
+      expect(flash[:danger]).to eq('Not logged in!')
     end
   end
 
   describe 'As logged in user' do
     let(:user) { create(:user) }
     let(:tweet) { create(:tweet, user: user) }
+    let(:other_user) { create(:user) }
 
     context 'when trying to manipulate with other users retweet' do
-      let(:other_user) { create(:user) }
 
       before do 
-        post_params = {
-          params: {
-            ss: {
-              email: other_user.email,
-              password: other_user.password
-            }
-          }
-        }
-        
-        post auths_login_path, post_params
+        log_in_request(other_user)
       end
 
       it 'should not be able to update them' do
         retweet = create(:retweet, tweet: tweet)
-
+        
         patch_params = {
           params: {
             retweet: {
@@ -98,16 +89,7 @@ RSpec.describe "RetweetsProcesses" do
 
     context 'when is his tweet' do
       it 'should be able to delete' do
-        post_params = {
-          params: {
-            ss: {
-              email: user.email,
-              password: user.password
-            }
-          }
-        }
-        
-        post auths_login_path, post_params
+        log_in_request(user)
 
         retweet = create(:retweet, tweet: tweet)
 
@@ -121,16 +103,7 @@ RSpec.describe "RetweetsProcesses" do
       let(:retweet) { create(:retweet, tweet: tweet) }
 
       before do
-        post_params = {
-          params: {
-            ss: {
-              email: user.email,
-              password: user.password
-            }
-          }
-        }
-
-        post auths_login_path, post_params
+        log_in_request(user)
       end
 
       it 'should be able to update' do

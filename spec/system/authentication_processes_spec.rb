@@ -35,7 +35,7 @@ RSpec.describe "AuthenticationProcesses" do
       it 'should give a flash error for editing' do
         create(:tweet)
         visit '/tweets/1/edit'
-        expect(page).to have_content('You dont have permission to edit!')
+        expect(page).to have_content('Not logged in!')
       end
     end
   end

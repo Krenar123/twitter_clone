@@ -1,7 +1,7 @@
 class TweetsController < ApplicationController
+  skip_before_action :require_login, only: [:index, :display_likes, :display_retweets]
   def index
     @tweets = Tweet.all
-    @header_tweets = Tweet.take(4)
   end
 
   def show
@@ -10,32 +10,27 @@ class TweetsController < ApplicationController
   end
 
   def new
-    session_alert('alert','Not logged in') unless logged_in?
     @tweet = Tweet.new
   end
 
   def create
     @tweet = Tweet.new(tweet_params)
     @tweet.user = current_user
-    if logged_in?
-      if @tweet.save
-        redirect_to @tweet
-      else
-        render :new
-      end
+    if @tweet.save
+      redirect_to @tweet
     else
-      session_alert('alert','Not logged in')
+      render :new
     end
   end
 
   def edit
     @tweet = Tweet.find(params[:id])
-    session_alert('alert','You dont have permission to edit!', @tweet) unless logged_in? && user_equals?(@tweet.user)
+    session_alert('alert','You dont have permission to edit!', @tweet) unless user_equals?(@tweet.user)
   end
 
   def update
     @tweet = Tweet.find(params[:id])
-    if logged_in? && user_equals?(@tweet.user)
+    if user_equals?(@tweet.user)
       if @tweet.update(tweet_params)
         redirect_to @tweet
       else
@@ -48,7 +43,7 @@ class TweetsController < ApplicationController
 
   def destroy
     @tweet = Tweet.find(params[:id])
-    if logged_in? && user_equals?(@tweet.user)
+    if user_equals?(@tweet.user)
       @tweet.destroy
       redirect_to root_path
     else

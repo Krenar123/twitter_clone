@@ -1,4 +1,6 @@
 class Auths::UsersController < ApplicationController
+    skip_before_action :require_login, only: [:new, :show, :create]
+
     def new 
         @user = User.new
     end
@@ -9,12 +11,12 @@ class Auths::UsersController < ApplicationController
 
     def edit
         @user = User.find(params[:id])
-        session_alert('alert','You dont have permission to edit!', auths_user_path(@user)) unless logged_in? &&  user_equals?(@user)
+        session_alert('alert','You dont have permission to edit!', auths_user_path(@user)) unless user_equals?(@user)
     end
 
     def update
         @user = User.find(params[:id])
-        if logged_in? && user_equals?(@user)
+        if user_equals?(@user)
             if @user.update(user_params)
                 redirect_to auths_user_path(@user)
             else
