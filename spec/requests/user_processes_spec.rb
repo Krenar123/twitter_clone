@@ -151,9 +151,9 @@ RSpec.describe "UserProcesses" do
 
         get "/auths/users/#{user_2.id}/edit"
 
-        expect(response).to redirect_to(auths_user_path(user_2))
+        expect(response).to redirect_to(root_path)
         follow_redirect!
-        expect(response.body).to include('You dont have permission to edit!')
+        expect(response.body).to include('You dont have permission!')
       end
 
       it 'should not allow to update another user' do
@@ -170,9 +170,9 @@ RSpec.describe "UserProcesses" do
 
         patch "/auths/users/#{user_2.id}", post_params
 
-        expect(response).to redirect_to(auths_user_path(user_2))
+        expect(response).to redirect_to(root_path)
         follow_redirect!
-        expect(response.body).to include('You dont have permission to edit!')
+        expect(response.body).to include('You dont have permission!')
       end
     end
   end

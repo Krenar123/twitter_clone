@@ -121,17 +121,17 @@ RSpec.describe "TweetProcesses" do
         }
         patch tweet_path(tweet), patch_params
 
-        expect(response).to redirect_to(tweet_path(tweet))
+        expect(response).to redirect_to(root_path)
         follow_redirect!
-        expect(response.body).to include('You dont have permission to edit!')
+        expect(response.body).to include('You dont have permission!')
       end
 
       it 'should not allow to delete them' do 
         delete tweet_path(tweet)
 
-        expect(response).to redirect_to(tweet_path(tweet))
+        expect(response).to redirect_to(root_path)
         follow_redirect!
-        expect(response.body).to include('You dont have permission to delete!')
+        expect(response.body).to include('You dont have permission!')
       end
     end
   end

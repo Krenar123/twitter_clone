@@ -73,7 +73,7 @@ RSpec.describe "RetweetsProcesses" do
         
         expect(response).to redirect_to(tweet)
         follow_redirect!
-        expect(response.body).to include('You dont have permission to edit!')
+        expect(response.body).to include('You dont have permission!')
       end
       
       it 'should not be able to destroy them' do
@@ -83,7 +83,7 @@ RSpec.describe "RetweetsProcesses" do
         
         expect(response).to redirect_to(tweet)
         follow_redirect!
-        expect(response.body).to include('You dont have permission to delete!')
+        expect(response.body).to include('You dont have permission!')
       end
     end
 

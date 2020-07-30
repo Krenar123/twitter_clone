@@ -1,4 +1,7 @@
 class RetweetsController < ApplicationController
+    before_action :find_retweet, except: [:create]
+    before_action :correct_user, only: [:destroy, :edit, :update]
+
     def create
         tweet = Tweet.find(params[:tweet_id])
         retweet = tweet.retweets.create(retweet_params)
@@ -12,35 +15,20 @@ class RetweetsController < ApplicationController
     end
 
     def destroy
-        retweet = Retweet.find(params[:id])
-        if user_equals?(retweet.user) || user_equals?(retweet.tweet.user) 
-            retweet.destroy
-            redirect_to tweet_path(retweet.tweet)
-        else
-            session_alert('alert','You dont have permission to delete!',retweet.tweet) 
-        end
+        @retweet.destroy
+        redirect_to tweet_path(@retweet.tweet)
     end
 
     def edit
-        @retweet = Retweet.find(params[:id])
-        if user_equals?(@retweet.user) || user_equals?(@retweet.tweet.user) 
-            @tweet = @retweet.tweet
-        else
-            session_alert('alert','You dont have permission to edit!',@retweet.tweet)
-        end 
+        @tweet = @retweet.tweet
     end
 
     def update
-        @retweet = Retweet.find(params[:id])
         @tweet = @retweet.tweet
-        if user_equals?(@retweet.user) || user_equals?(@retweet.tweet.user) 
-            if @retweet.update(retweet_params)
-                redirect_to tweet_path(@tweet)
-            else
-                render :edit
-            end
-        else 
-            session_alert('alert','You dont have permission to edit!',@tweet)
+        if @retweet.update(retweet_params)
+            redirect_to tweet_path(@tweet)
+        else
+            render :edit
         end
     end
 
@@ -48,5 +36,15 @@ class RetweetsController < ApplicationController
 
     def retweet_params
         params.require(:retweet).permit(:rtweet)
+    end
+
+    def find_retweet
+        @retweet = Retweet.find(params[:id])
+    end
+
+    def correct_user
+        unless user_equals?(@retweet.user) || user_equals?(@retweet.tweet.user) 
+            session_alert('alert', 'You dont have permission!', @retweet.tweet)
+        end
     end
 end

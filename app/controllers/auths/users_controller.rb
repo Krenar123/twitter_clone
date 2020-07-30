@@ -1,35 +1,28 @@
 class Auths::UsersController < ApplicationController
     skip_before_action :require_login, only: [:new, :show, :create]
+    before_action :find_user, except: [:new, :create]
+    before_action :correct_user, only: [:edit, :update]
 
     def new 
         @user = User.new
     end
 
     def show 
-        @user = User.find(params[:id])
     end
 
     def edit
-        @user = User.find(params[:id])
-        session_alert('alert','You dont have permission to edit!', auths_user_path(@user)) unless user_equals?(@user)
     end
 
     def update
-        @user = User.find(params[:id])
-        if user_equals?(@user)
-            if @user.update(user_params)
-                redirect_to auths_user_path(@user)
-            else
-                render :edit 
-            end
+        if @user.update(user_params)
+            redirect_to auths_user_path(@user)
         else
-            session_alert('alert','You dont have permission to edit!', auths_user_path(@user)) 
+            render :edit 
         end
     end
 
     def create 
         @user = User.new(user_params)
-
         if @user.save
             log_in(@user)
             redirect_to auths_user_path(@user)
@@ -43,5 +36,16 @@ class Auths::UsersController < ApplicationController
 
     def user_params
         params.require(:user).permit(:name,:email,:password,:password_confirmation)
+    end
+
+    def find_user
+        @user = User.find(params[:id])
+    end
+
+    def correct_user
+        unless user_equals?(@user)
+            flash[:danger] = "You dont have permission!"
+            redirect_to root_path
+        end
     end
 end

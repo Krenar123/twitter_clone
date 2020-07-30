@@ -1,11 +1,13 @@
 class TweetsController < ApplicationController
   skip_before_action :require_login, only: [:index, :display_likes, :display_retweets]
+  before_action :find_tweet, except: [:index, :new, :create]
+  before_action :correct_user, only: [:edit, :update, :destroy]
+
   def index
     @tweets = Tweet.all
   end
 
   def show
-    @tweet = Tweet.find(params[:id])
     @retweets = @tweet.retweets
   end
 
@@ -24,35 +26,22 @@ class TweetsController < ApplicationController
   end
 
   def edit
-    @tweet = Tweet.find(params[:id])
-    session_alert('alert','You dont have permission to edit!', @tweet) unless user_equals?(@tweet.user)
   end
 
   def update
-    @tweet = Tweet.find(params[:id])
-    if user_equals?(@tweet.user)
-      if @tweet.update(tweet_params)
-        redirect_to @tweet
-      else
-        render :edit
-      end
+    if @tweet.update(tweet_params)
+      redirect_to @tweet
     else
-      session_alert('alert','You dont have permission to edit!', @tweet)
+      render :edit
     end
   end
 
   def destroy
-    @tweet = Tweet.find(params[:id])
-    if user_equals?(@tweet.user)
-      @tweet.destroy
-      redirect_to root_path
-    else
-      session_alert('alert','You dont have permission to delete!', @tweet)
-    end 
+    @tweet.destroy
+    redirect_to root_path
   end
 
   def display_likes
-    @tweet = Tweet.find(params[:id])
     respond_to do |format|
       format.js 
       format.json { render json: @tweet }
@@ -60,7 +49,6 @@ class TweetsController < ApplicationController
   end 
 
   def display_retweets
-    @tweet = Tweet.find(params[:id])
     respond_to do |format|
       format.js 
     end
@@ -72,4 +60,14 @@ class TweetsController < ApplicationController
     params.require(:tweet).permit(:tweet)
   end
   
+  def find_tweet
+    @tweet = Tweet.find(params[:id])
+  end
+
+  def correct_user
+    unless user_equals?(@tweet.user)
+        flash[:danger] = "You dont have permission!"
+        redirect_to root_path
+    end
+  end
 end
