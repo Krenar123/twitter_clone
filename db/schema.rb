@@ -12,9 +12,12 @@
 
 ActiveRecord::Schema.define(version: 2020_07_07_215728) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "likes", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "tweet_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "tweet_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["tweet_id"], name: "index_likes_on_tweet_id"
@@ -24,10 +27,10 @@ ActiveRecord::Schema.define(version: 2020_07_07_215728) do
 
   create_table "retweets", force: :cascade do |t|
     t.string "rtweet"
-    t.integer "tweet_id", null: false
+    t.bigint "tweet_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "user_id"
+    t.bigint "user_id"
     t.index ["tweet_id"], name: "index_retweets_on_tweet_id"
     t.index ["user_id"], name: "index_retweets_on_user_id"
   end
@@ -36,7 +39,7 @@ ActiveRecord::Schema.define(version: 2020_07_07_215728) do
     t.string "tweet"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "user_id"
+    t.bigint "user_id"
     t.index ["user_id"], name: "index_tweets_on_user_id"
   end
 
