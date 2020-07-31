@@ -1,5 +1,5 @@
 class TweetsController < ApplicationController
-  skip_before_action :require_login, only: [:index, :display_likes, :display_retweets]
+  skip_before_action :require_login, only: [:index, :show, :display_likes, :display_retweets]
   before_action :find_tweet, except: [:index, :new, :create]
   before_action :correct_user, only: [:edit, :update, :destroy]
 
